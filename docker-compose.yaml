@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  haproxy:
+    image: haproxy:1.8.8-alpine
+    ports:
+      - 8000:15672
+      - 5672:5672
+      - 1936:1936
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+
+  rabbitmq1:
+    image: rabbitmq:3.6.15-management-alpine
+    hostname: rabbitmq1
+    ports:
+      - 8001:15672
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE}
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+      - RABBITMQ_DEFAULT_VHOST=${RABBITMQ_DEFAULT_VHOST}
+    volumes:
+      - ./shared/rabbitmq1/data:/var/lib/rabbitmq
+
+  rabbitmq2:
+    image: rabbitmq:3.6.15-management-alpine
+    hostname: rabbitmq2
+    entrypoint: /usr/local/bin/rabbitmq2-entrypoint.sh
+    ports:
+      - 8002:15672
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE}
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+      - RABBITMQ_DEFAULT_VHOST=${RABBITMQ_DEFAULT_VHOST}
+    volumes:
+      - ./shared/rabbitmq2/data:/var/lib/rabbitmq
+      - ./rabbitmq2-entrypoint.sh:/usr/local/bin/rabbitmq2-entrypoint.sh
