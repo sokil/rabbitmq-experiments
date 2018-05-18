@@ -11,5 +11,10 @@
             "name": "Dmytro Sokil",
             "email": "dmytro.sokil@gmail.com"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "Command\\" : "Commands"
+        }
+    }
 }
