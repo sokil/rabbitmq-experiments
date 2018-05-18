@@ -1,0 +1,15 @@
+{
+    "name": "sokil/rabbitmq-experiments",
+    "type": "project",
+    "require": {
+        "symfony/console": "^4.0",
+        "php-amqplib/php-amqplib": "2.7.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dmytro Sokil",
+            "email": "dmytro.sokil@gmail.com"
+        }
+    ]
+}
