@@ -5,7 +5,7 @@ services:
     image: haproxy:1.8.8-alpine
     ports:
       - 8000:15672
-      - 5672:5672
+      - ${RABBITMQ_CLUSTER_PORT}:5672
       - 1936:1936
     volumes:
       - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
@@ -37,3 +37,11 @@ services:
     volumes:
       - ./shared/rabbitmq2/data:/var/lib/rabbitmq
       - ./rabbitmq2-entrypoint.sh:/usr/local/bin/rabbitmq2-entrypoint.sh
+
+  php-cli:
+    image: php:7.1.17-cli
+    hostname: php-cli
+    command: "bash /entrypoint.sh"
+    volumes:
+      - ./php-entrypoint.sh:/entrypoint.sh
+      - ../:/src
