@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use PhpAmqpLib\Message\AMQPMessage;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 
-class FanoutCommand extends Command
+class TopicCommand extends Command
 {
     /**
      * @var AbstractConnection

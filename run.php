@@ -23,8 +23,14 @@ $socketConnection = new AMQPLazySocketConnection(
 
 // create console application
 $app = new Application();
+
 $app->add(new \Command\FanoutCommand(
     "fanout",
+    $socketConnection
+));
+
+$app->add(new \Command\FanoutVsTopicBenchCommand(
+    "fanoutVsTopic",
     $socketConnection
 ));
 
